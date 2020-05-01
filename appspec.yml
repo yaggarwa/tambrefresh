@@ -8,8 +8,8 @@ BeforeInstall:
     timeout: 300
     runas: root
 AfterInstall:
-  - location: scripts/stop_previous_instance.sh
   - location: scripts/after_install.sh
+  - location: scripts/stop_previous_instance.sh
     timeout: 300
     runas: root
 ApplicationStart:
