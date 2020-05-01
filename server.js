@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
       io.to(gameId).emit('GameConnected', 'You joined Game ID - ' + gameId);
       console.log(io.nsps['/'].adapter.rooms[gameId]);
     }
-    else{
+    else {
       console.log("Invalid Game Id");
       socket.emit('InvalidGameId', "Game Id: " + gameId + " does not exists.");
     }
@@ -47,14 +47,14 @@ io.on('connection', (socket) => {
     var randomNum = Math.floor(Math.random() * rangeup) + 1;
     var currNum = numGrid[gameId][randomNum - 1].num;
     numGrid[gameId].splice(randomNum - 1, 1);
-    console.log('Current Number :'+ currNum);
+    console.log('Current Number :' + currNum);
     io.sockets.in(data).emit('newNum', currNum);
   })
-  socket.on('disconnet', ()=>{
+  socket.on('disconnet', () => {
     socket.disconnect();
   });
   console.log('a user connected:' + gameId);
-
+});
 http.listen(8080, () => {
   console.log('listening on *:8080');
 });
