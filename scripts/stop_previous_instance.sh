@@ -1,2 +1,2 @@
-pm2 stop server.js 
+sudo pm2 stop server.js 
 exit 0

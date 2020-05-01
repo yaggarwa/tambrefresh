@@ -1,1 +1,1 @@
-rm -r /home/ubuntu/tamb2.0/
+sudo rm -r /home/ubuntu/tamb2.0/

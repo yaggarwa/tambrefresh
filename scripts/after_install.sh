@@ -1,4 +1,4 @@
-npm install pm2@latest
-npm install express
-npm install socket.io
-npm install path
+sudo npm install pm2@latest -g
+sudo npm install express -g
+sudo npm install socket.io -g
+sudo npm install path -g
