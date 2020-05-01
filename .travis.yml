@@ -13,7 +13,7 @@ deploy:
   local_dir: dpl_cd_upload
   skip_cleanup: true
   on: &2
-    repo: yaggarwa/tamb
+    repo: yaggarwa/tambrefresh
   bucket: mytamb-bucket02
   region: us-east-2
 
@@ -31,6 +31,6 @@ deploy:
 script:
   - unset CI 
   - npm run build
-  - zip -r latest *
+  - zip -r latest * -x node_modules/
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
