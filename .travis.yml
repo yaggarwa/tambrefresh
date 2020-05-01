@@ -31,6 +31,6 @@ deploy:
 script:
   - unset CI 
   - npm run build
-  - zip -r latest * -x node_modules/
+  - zip -r --exclude node_modules latest * 
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
