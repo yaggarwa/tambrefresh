@@ -548,7 +548,7 @@ class App extends React.Component {
             <Grid item lg={12} hidden={(this.state.gameType)}>
               <Button variant="contained" disabled={this.state.showTicket} onClick={() => this.genTicket()}
                 style={{ height: 50, width: 100 }}>
-                Get Tickets</Button>
+                Get Ticket</Button>
             </Grid>
             <Grid item lg={12} hidden={!(this.state.showTicket)}>
               <Button variant="contained" onClick={() => this.hideTicket()}
