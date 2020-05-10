@@ -182,7 +182,7 @@ class App extends React.Component {
         this.setState({
           currNum: numsAnn[numsAnn.length],
           numGridState: numGridState,
-          banner: "Current Number - " + currNum,
+          banner: "Current Number - " + numsAnn[numsAnn.length],
         });
       })
       socket.on('newNum', currNum => {
