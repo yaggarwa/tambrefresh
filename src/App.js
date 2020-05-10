@@ -143,6 +143,23 @@ class App extends React.Component {
       gameStatus: 'Playing Single Player',
     });
     socket = socketIOClient(ENDPOINT);
+    socket.on('reconnected', () => {
+      if (this.state.inputValue !== '') {
+        this.joinGame();
+      }
+    })
+    socket.on('boardState', numsAnn => {
+      var numGridState = this.state.numGridState;
+      numsAnn.map((currNum) => {
+        console.log("new number: " + currNum);
+        numGridState[currNum - 1].value = true;
+      })
+      this.setState({
+        currNum: currNum,
+        numGridState: numGridState,
+        banner: "Current Number - " + currNum,
+      });
+    })
   }
   hideTicket() {
     var showTicket = this.state.showTicket;

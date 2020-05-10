@@ -12,6 +12,7 @@ app.get('/', function (req, res) {
 var gameId = 1;
 var numGrid = [];
 var gameIdPrefix = "GAMEID-"
+var numsAnn = [];
 
 io.on('connection', (socket) => {
   socket.on('joinGame', gameId => {
@@ -21,6 +22,9 @@ io.on('connection', (socket) => {
       socket.join(gameId);
       io.to(gameId).emit('GameConnected', 'You joined Game ID - ' + gameId);
       console.log(io.nsps['/'].adapter.rooms[gameId]);
+      if (numsAnn.length!==0){
+          socket.emit("boardState", numsAnn);
+      }
     }
     else {
       console.log("Invalid Game Id");
@@ -48,10 +52,14 @@ io.on('connection', (socket) => {
     var currNum = numGrid[gameId][randomNum - 1].num;
     numGrid[gameId].splice(randomNum - 1, 1);
     console.log('Current Number :' + currNum);
+    numsAnn.push(currNum);
     io.sockets.in(data).emit('newNum', currNum);
   })
   socket.on('disconnet', () => {
     socket.disconnect();
+  });
+  socket.on('reconnect', ()=> {
+    socket.emit('reconnected');
   });
   console.log('a user connected:' + gameId);
 });
