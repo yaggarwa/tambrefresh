@@ -23,6 +23,7 @@ io.on('connection', (socket) => {
       io.to(gameId).emit('GameConnected', 'You joined Game ID - ' + gameId);
       console.log(io.nsps['/'].adapter.rooms[gameId]);
       if (numsAnn.length!==0){
+        console.log("sending boardstate for new joiner");
           socket.emit("boardState", numsAnn);
       }
     }

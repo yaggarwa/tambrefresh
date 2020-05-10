@@ -143,23 +143,6 @@ class App extends React.Component {
       gameStatus: 'Playing Single Player',
     });
     socket = socketIOClient(ENDPOINT);
-    socket.on('reconnected', () => {
-      if (this.state.inputValue !== '') {
-        this.joinGame();
-      }
-    })
-    socket.on('boardState', numsAnn => {
-      var numGridState = this.state.numGridState;
-      numsAnn.map((currNum) => {
-        console.log("new number: " + currNum);
-        numGridState[currNum - 1].value = true;
-      })
-      this.setState({
-        currNum: currNum,
-        numGridState: numGridState,
-        banner: "Current Number - " + currNum,
-      });
-    })
   }
   hideTicket() {
     var showTicket = this.state.showTicket;
@@ -184,6 +167,24 @@ class App extends React.Component {
           gameId: this.state.inputValue,
         });
       });
+      socket.on('reconnected', () => {
+        if (this.state.inputValue !== '') {
+          this.joinGame();
+        }
+      })
+      socket.on('boardState', numsAnn => {
+        console.log("inside boardstate " + numsAnn);
+        var numGridState = this.state.numGridState;
+        numsAnn.map((currNum) => {
+          console.log("new number: " + currNum);
+          numGridState[currNum - 1].value = true;
+        })
+        this.setState({
+          currNum: currNum,
+          numGridState: numGridState,
+          banner: "Current Number - " + currNum,
+        });
+      })
       socket.on('newNum', currNum => {
         console.log("new number: " + currNum);
         var numGridState = this.state.numGridState;
@@ -213,6 +214,12 @@ class App extends React.Component {
         gameJoined: true,
         gameStatus: 'Multi-Player \n Game Id: ' + data,
       });
+    })
+    socket.on('reconnected', () => {
+      console.log("inside reconnected");
+      if (this.state.inputValue !== '') {
+        this.joinGame();
+      }
     })
   }
 
