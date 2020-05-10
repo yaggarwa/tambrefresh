@@ -180,7 +180,7 @@ class App extends React.Component {
           numGridState[currNum - 1].value = true;
         })
         this.setState({
-          currNum: currNum,
+          currNum: numsAnn[numsAnn.length],
           numGridState: numGridState,
           banner: "Current Number - " + currNum,
         });
